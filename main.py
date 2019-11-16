@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request
 
 import database
+import security
+
+import random
 
 from sqlalchemy import create_engine, and_, or_
 from sqlalchemy.orm import sessionmaker
@@ -41,4 +44,5 @@ def internal_server(e):
     return render_template('error.html', e=e)
 
 if __name__ == '__main__':
+    app.secret_key = random.randint(1, 100000)
     app.run(debug=True, port=3000)
